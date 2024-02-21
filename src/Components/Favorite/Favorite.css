@@ -1,0 +1,12 @@
+.favorite-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-inline: .5rem;
+  margin-inline: auto;
+  max-width: 1200px;
+}
+
+.favorite-noFavs {
+  margin-block: 4.5rem;
+}

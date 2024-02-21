@@ -1,0 +1,27 @@
+.roomDetail-container img {
+  height: 87vh;
+  width: 100%;
+  object-fit: cover;
+}
+
+.roomDetail-title {
+  color: var(--clr-dark-main);
+  font-weight: 700;
+  margin-bottom: 2rem;
+}
+
+.roomDetail-body {
+  padding: 3rem;
+  max-width: 1200px;
+  margin-inline: auto;
+}
+
+.roomDetail-loading {
+  margin: 3.75rem 3rem;
+}
+
+.roomDetail-img {
+  height: 87vh;
+  width: 100%;
+  object-fit: cover;
+}

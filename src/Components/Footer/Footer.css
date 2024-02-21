@@ -1,0 +1,29 @@
+.footer {
+  background-color: var(--clr-dark-main);
+}
+
+.footer-container {
+  max-width: 1200px !important;
+  padding-top: 4rem;
+}
+
+.text-uppercase {
+  font-family: 'Helvetica';
+}
+
+.footer-link:hover {
+  text-decoration: underline !important;
+}
+
+.border-start-0 {
+  border-radius: 0 6px 6px 0 !important;
+}
+
+.footer-btn {
+  color: var(--clr-dark-main) !important;
+}
+
+.footer-btn:hover {
+  background-color: var(--clr-dark-main) !important;
+  color: white !important;
+}

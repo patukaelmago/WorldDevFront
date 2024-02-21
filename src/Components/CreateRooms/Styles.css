@@ -1,0 +1,21 @@
+/* .cardHotels-container {
+    display: flex ;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+.form-control{
+margin-top: 8px;
+margin-bottom: 10px;
+border-color: rgb(166, 219, 219);
+width: 300px;
+}
+.btn btn-primary mb-2{
+    width: 300px;
+} */
+
+.punto-list{
+  list-style-type:none;
+}

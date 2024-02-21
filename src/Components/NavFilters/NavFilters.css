@@ -1,0 +1,15 @@
+.navfilters-container {
+  width: 100%;
+  padding: 2rem;
+  gap: 1rem;
+}
+
+.navfilters-clear-btn {
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .navfilters-clear-btn {
+    width: auto;
+  }
+}
