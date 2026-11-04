@@ -17,7 +17,7 @@ export const FILTER_BOOKS_BY_STATUS = 'FILTER_BOOKS_BY_STATUS';
 export const CLEAN_HISTORY = 'CLEAN_HISTORY'
 
 // const BACK_URL = "http://localhost:3001";
-const BACK_URL = "https://worlddevback-w379.onrender.com"
+const BACK_URL = process.env.REACT_APP_API_URL || "https://worlddevback-w379.onrender.com"
 //-----------------------POST A STRIPE-------------------
 export default function postStripe(payload, booking, receipt) {
   return async function (dispatch) {
@@ -90,7 +90,7 @@ export function getBookingByIdUser(id) {
 export function updateStatusBooking(payload) {
   return async function (dispatch) {
     try {
-      const booking = await axios.put(`${BACK_URL}/booking/status`, payload);
+      await axios.put(`${BACK_URL}/booking/status`, payload);
       dispatch({
         type: PUT_BOOKING_STATUS,
         payload

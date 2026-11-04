@@ -54,6 +54,7 @@ function App() {
   return (
     <AuthProvider>
       <Nav />
+      <div className="text-center small py-2 px-3" style={{background:"#e9f7f9",color:"#21454a"}}>Henry group project · Portfolio demo · Sample hotels and reservations, no real charges.</div>
       <Routes>
         <Route exact path="/terms" element={< Terms />} />
         <Route exact path="/privacy" element={< Privacy />} />

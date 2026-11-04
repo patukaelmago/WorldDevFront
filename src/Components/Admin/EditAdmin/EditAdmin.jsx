@@ -58,8 +58,6 @@ const EditAdmin = (id) => {
         .toString()
     : null;
 
-  if (idAdmin) setInputA({ id: idAdmin });
-
   function refreshPage() {
     window.location.reload();
     setTimeout(() => {
@@ -70,13 +68,6 @@ const EditAdmin = (id) => {
 
   useEffect(() => {
     dispatch(getAllAdmins());
-    if (user && user.hasOwnProperty("uid")) {
-      setInputA({
-        ...inputA,
-        // id: user.uid,
-        // email: user.email
-      });
-    }
   }, [dispatch, user]);
 
   function handleChangeData(e) {
@@ -109,7 +100,7 @@ const EditAdmin = (id) => {
       })
     );
     if (inputA.create === true) {
-      dispatch(modifyUsers(inputA));
+      dispatch(modifyUsers({ ...inputA, id: idAdmin }));
       dispatch(cleanFormAdmin());
       navigate("/profileSuperAdmin/adminTable");
       refreshPage();

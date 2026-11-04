@@ -43,13 +43,11 @@ const CreateServHotels = () => {
     useEffect(() => {
         if (datos && datos.rol === "admin") {
             let hotelFinded = hotels.find(e => e.name === datos.hotel)
+      if (!hotelFinded) return;
 
-            setInput_serv_hotel({
-                ...input_serv_hotel,
-                idHotel: hotelFinded.id
-            })
+            setInput_serv_hotel(previous => ({ ...previous, idHotel: hotelFinded.id }))
         }
-    }, [datos])
+    }, [datos, hotels])
 
     //------------ HANDLE CHANGE NAME SERVICES HOTEL--------------//
     const handleName = (e) => {

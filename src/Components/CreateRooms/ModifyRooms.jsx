@@ -46,14 +46,12 @@ export default function ModifyRooms() {
   useEffect(() => {
     if (datos && datos.rol === "admin") {
       let hotelFinded = hotels.find(e => e.name === datos.hotel)
+      if (!hotelFinded) return;
 
-      setInput_hotel({
-        ...input_hotel,
-        idHotel: hotelFinded.id
-      })
+      setInput_hotel(previous => ({ ...previous, idHotel: hotelFinded.id }))
       dispatch(getAllRoomsOfHotel(hotelFinded.id))
     }
-  }, [dispatch, datos])
+  }, [dispatch, datos, hotels])
 
   const [input_hotel, setInput_hotel] = useState({
     idHotel: "",

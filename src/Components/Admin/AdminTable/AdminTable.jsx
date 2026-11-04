@@ -11,8 +11,8 @@ export default function AdminTable() {
   const navigate = useNavigate()
   const allAdmins = useSelector(state => state.reducerAuth.allAdmins)
   const [data, setData] = useState([]);
-  const [modalToUpdate, setModalToUpdate] = useState(false);
-  const [form, setForm] = useState({
+  const [, setModalToUpdate] = useState(false);
+  const [, setForm] = useState({
     name: "",
     email: "",
     hotel: ""

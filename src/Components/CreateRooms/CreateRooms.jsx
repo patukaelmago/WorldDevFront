@@ -58,13 +58,11 @@ export default function CreateRooms() {
   useEffect(() => {
     if (datos && datos.rol === "admin") {
       let hotelFinded = hotels.find(e => e.name === datos.hotel)
+      if (!hotelFinded) return;
 
-      input_setrooms({
-        ...input_rooms,
-        id: hotelFinded.id
-      })
+      input_setrooms(previous => ({ ...previous, id: hotelFinded.id }))
     }
-  }, [datos])
+  }, [datos, hotels])
 
   //------------------ HANDLE CHANGE ROOMS-------------------//
   function handleChange(e) {

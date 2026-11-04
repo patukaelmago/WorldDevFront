@@ -42,14 +42,14 @@ const EditUser = () => {
 
   useEffect(() => {
     if (user && user.hasOwnProperty('uid')) {
-      setInputU({
-        ...inputU,
+      setInputU(previous => ({
+        ...previous,
         id: user.uid,
         displayName: user.displayName,
         photoURL: user.photoURL,
         email: user.email,
         favorite: user.favorite
-      })
+      }))
     }
   }, [user])
 

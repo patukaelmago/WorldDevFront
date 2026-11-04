@@ -74,3 +74,12 @@ Además, tendrán la posibilidad de calificar su estadía y dejar comentarios, c
 6. Oliver Sebastian Borda Mahecha.
 7. Ana Sol Maldonado.
 8. Hernan Javier Rinaldi.
+
+
+## Maintained portfolio version (2026)
+
+The original Henry team and credits above are preserved. Patricio Uskaer maintains this deployment using his own GitHub and Render services, a separate PostgreSQL database, and the Firebase project `world-developer`, where he is an owner. The old `world-developer-f5a6e` project and repository service-account keys are no longer used.
+
+The catalogue is seeded with explicitly fictional demonstration properties. Checkout creates demo reservations only; it never collects card details, charges money or sends emails. Availability and prices are checked on the server.
+
+Run `npm install` and `npm run build`. Set `REACT_APP_API_URL` at build time to override the default API. Firebase web configuration is public; authorization is enforced by verified ID tokens and server roles. Never commit private service-account credentials.

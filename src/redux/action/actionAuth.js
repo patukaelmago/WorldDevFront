@@ -9,7 +9,7 @@ export const DELETE_USERS ="DELETE_USERS";
 export const CLEAN_FORM_ADMIN = "CLEAN_FORM_ADMIN"
 
 // const BACK_URL = "http://localhost:3001";
-const BACK_URL = "https://worlddevback-w379.onrender.com"
+const BACK_URL = process.env.REACT_APP_API_URL || "https://worlddevback-w379.onrender.com"
 export function deleteUsers(id){
   return async function(dispatch) {
     try {
@@ -87,7 +87,7 @@ export function getDetailUser(id) {
 export function createUsers(payload) {
   return async function (dispatch) {
     try {
-      const users = await axios.post(`${BACK_URL}/users`, payload)
+      await axios.post(`${BACK_URL}/users`, payload)
       dispatch({
         type: POST_USERS,
         payload
@@ -101,7 +101,7 @@ export function createUsers(payload) {
 export function modifyUsers(payload) {
   return async function (dispatch) {
     try {
-      const users = await axios.put(`${BACK_URL}/users`, payload)
+      await axios.put(`${BACK_URL}/users`, payload)
       dispatch({
         type: PUT_USERS,
         payload

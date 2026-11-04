@@ -46,15 +46,15 @@ export default function Register() {
     e.preventDefault();
     setError("");
     try {
-      await signup(userComunes.email, userComunes.password, userComunes.rol, userComunes.displayName, userComunes.photoURL, userComunes.favorites);
+      const result = await signup(userComunes.email, userComunes.password, userComunes.rol, userComunes.displayName, userComunes.photoURL, userComunes.favorites);
       let credential = {
         displayName: userComunes.displayName,
         photoURL: userComunes.photoURL,
         email: userComunes.email,
-        id: userComunes.uid,
+        id: result.user.uid,
         favorites: userComunes.favorites
       }
-      dispatch(createUsers(credential))
+      await dispatch(createUsers(credential))
 
       const auth = getAuth();
       sendEmailVerification(auth.currentUser)

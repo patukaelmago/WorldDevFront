@@ -9,7 +9,7 @@ export const CLEAN_FAVORITE = "CLEAN_FAVORITE";
 
 
 // const BACK_URL = "http://localhost:3001";
-const BACK_URL = "https://worlddevback-w379.onrender.com"
+const BACK_URL = process.env.REACT_APP_API_URL || "https://worlddevback-w379.onrender.com"
 
 export function addRoomToFavorites(payload, userId) {
   return async function (dispatch) {

@@ -22,6 +22,7 @@ const validate = (input_event) => {
 
 const ModifyEvents = () => {
   const dispatch = useDispatch();
+  const datos = useSelector((state) => state.reducerAuth.users);
 
   const hotels = useSelector(state => state.reducerHotel.hotels)
   const allEvents = useSelector(state => state.reducerHotel.allEvents)
@@ -42,14 +43,14 @@ const ModifyEvents = () => {
     if (datos && datos.rol === "superAdmin"){
     !allEvents.length && dispatch(getAllEvents())
     }
-  }, [dispatch, hotels])
+  }, [dispatch, hotels, datos, allEvents.length])
 
   //component will unmount
   useEffect(() => {
     return () => dispatch(clearEventById())
   }, [dispatch])
   //-------------------------------------------------
-  const datos = useSelector((state) => state.reducerAuth.users);
+
   const { user } = useAuth();
 
   useEffect(() => {
@@ -59,13 +60,11 @@ const ModifyEvents = () => {
  useEffect(()=> {
   if (datos && datos.rol === "admin"){
     let hotelFinded = hotels.find(e => e.name === datos.hotel)
+      if (!hotelFinded) return;
     dispatch(getEventsByIdHotel(hotelFinded.id))
-    setInput_event({
-      ...input_event,
-      idHotel: hotelFinded.id
-    })
+    setInput_event(previous => ({ ...previous, idHotel: hotelFinded.id }))
   }
- },[dispatch, datos])
+ },[dispatch, datos, hotels])
 
   //------------ HANDLE CHANGE EVENT--------------//
   const handleChangeEvent = (e) => {

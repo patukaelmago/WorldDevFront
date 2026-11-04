@@ -1,6 +1,5 @@
 import React from "react";
 import CardHotel from "../CardHotel/CardHotel";
-import Loader from "../Loader/Loader";
 import NavFilters from "../NavFilters/NavFilters";
 import "./CardHotels.css";
 
@@ -23,7 +22,7 @@ const CardHotels = ({ hotels, actualHotels }) => {
         ))
       ) : (
         !actualHotels.length
-        ? <Loader />
+        ? <p className="my-5" role="status">No hotels match your search. Try clearing the filters.</p>
         : <h1 className="my-5">{hotels}</h1>
       )}
     </div>

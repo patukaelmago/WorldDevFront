@@ -62,7 +62,7 @@ export const GET_CITY = "GET_CITY";
 export const GET_DEPARTMENT = "GET_DEPARTMENT";
 
 //-----------------URLS----------------------//
-const BACK_URL = "https://worlddevback-w379.onrender.com"
+const BACK_URL = process.env.REACT_APP_API_URL || "https://worlddevback-w379.onrender.com"
 // const BACK_URL = "http://localhost:3001";
 const URL_POST_HOTEL = `${BACK_URL}/hotels`;
 const URL_POST_ROOM = `${BACK_URL}/rooms`;
@@ -178,7 +178,7 @@ export function hotelByName(name) {
       console.log(error)
       dispatch({
         type: SEARCH_NAME_HOTEL,
-        payload: error.response.data
+        payload: []
       })
     }
   }
@@ -310,7 +310,7 @@ export function createRooms(payload) {
 export function createServicesHotels(payload) {
   return async function (dispatch) {
     try {
-      const servicesHotel = await axios.post(`${BACK_URL}/serviceHotels`,payload)
+      await axios.post(`${BACK_URL}/serviceHotels`,payload)
       dispatch ({
         type: POST_SERVICES_HOTEL,  
         payload   
@@ -325,7 +325,7 @@ export function createServicesHotels(payload) {
   export function modifyServicesHotels(payload) {
     return async function (dispatch) {
       try {
-        const servicesHotel = await axios.put(`${BACK_URL}/serviceHotels`,payload)
+        await axios.put(`${BACK_URL}/serviceHotels`,payload)
         dispatch ({
           type: PUT_SERVICES_HOTEL,
           payload     
@@ -339,7 +339,7 @@ export function createServicesHotels(payload) {
 export function createServicesRooms(payload) {
   return async function (dispatch) {
     try {
-      const servicesRoom = await axios.post(`${BACK_URL}/serviceRooms`,payload)
+      await axios.post(`${BACK_URL}/serviceRooms`,payload)
       dispatch ({
         type: POST_SERVICES_ROOM,  
         payload  
@@ -353,7 +353,7 @@ export function createServicesRooms(payload) {
 export function  modifyServicesRooms(payload) {
   return async function (dispatch) {
     try {
-      const servicesRoom = await axios.put(`${BACK_URL}/serviceRooms`,payload)
+      await axios.put(`${BACK_URL}/serviceRooms`,payload)
       dispatch ({
         type: PUT_SERVICES_ROOM,  
         payload   
@@ -388,7 +388,7 @@ export function clearServiceRoomById() {
     export function createEvents(payload) {
       return async function (dispatch) {
         try {
-          const event = await axios.post(`${BACK_URL}/events`,payload)
+          await axios.post(`${BACK_URL}/events`,payload)
           dispatch ({
             type: POST_EVENT, 
             payload    
@@ -415,7 +415,7 @@ export function clearServiceRoomById() {
       export function modifyEvents(payload) {
         return async function (dispatch) {
           try {
-            const event = await axios.put(`${BACK_URL}/events`, payload)
+            await axios.put(`${BACK_URL}/events`, payload)
             dispatch ({
               type: PUT_EVENT, 
               payload    

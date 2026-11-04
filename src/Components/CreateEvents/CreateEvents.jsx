@@ -56,13 +56,11 @@ const CreateEvents = () => {
   useEffect(() => {
     if (datos && datos.rol === "admin") {
       let hotelFinded = hotels.find(e => e.name === datos.hotel)
+      if (!hotelFinded) return;
 
-      setInput_event({
-        ...input_event,
-        idHotel: hotelFinded.id
-      })
+      setInput_event(previous => ({ ...previous, idHotel: hotelFinded.id }))
     }
-  }, [datos])
+  }, [datos, hotels])
 
   //------------ HANDLE CHANGE HOTEL NAME----------//
   const handleChangeHotel = (e) => {

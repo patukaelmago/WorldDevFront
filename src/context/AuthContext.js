@@ -1,73 +1,49 @@
-import { createContext, useContext, useEffect, useState } from "react";
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signOut,
-  onAuthStateChanged,
-  GoogleAuthProvider,
-  signInWithPopup,
-  sendPasswordResetEmail,
-} from "firebase/auth";
-
-import { auth } from "../firebase";
-import app from '../firebase'
-import { getFirestore, doc, setDoc, getDoc } from 'firebase/firestore';
-
+import { createContext, useContext, useEffect, useState } from 'react';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, sendPasswordResetEmail } from 'firebase/auth';
+import axios from 'axios';
+import { auth } from '../firebase';
+import { API_URL } from '../api';
 const authContext = createContext();
-
 export const useAuth = () => {
   const context = useContext(authContext);
-  if (!context) throw new Error("There is no Auth provider");
+  if (!context) throw new Error('There is no Auth provider');
   return context;
 };
-
 export default function AuthProvider({ children }) {
-  const firestore = getFirestore(app);
   const [user, setUser] = useState(null);
+  const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
-
-  const signup = async (email, password, rol, displayName, photoURL, favorites) => {
-    const infoUser = await createUserWithEmailAndPassword(auth, email, password)
-      .then((currentUser) => {
-        return currentUser;
-      })
-    const docuRefU = doc(firestore, `users/${infoUser.user.uid}`);
-    setDoc(docuRefU, { email: email, rol: rol, displayName: displayName, photoURL: photoURL, favorites: favorites });
+  const syncProfile = async current => {
+    const { data } = await axios.post(`${API_URL}/users`, { id: current.uid });
+    setProfile(data);
+    return data;
   };
-
-  const login = async (email, password) => await signInWithEmailAndPassword(auth, email, password);
-
-  const loginWithGoogle = async (email, rol, displayName, photoURL, favorite) => {
-    const googleProvider = new GoogleAuthProvider();
-    const infoGoo = await signInWithPopup(auth, googleProvider )
-      .then((currentUser) => {
-        return currentUser;
-      })
-    const docuRefU = doc(firestore, `users/${infoGoo.user.uid}`);
-    const info = (await getDoc(docuRefU)).data() 
-    if(info && (info.hasOwnProperty("favorites") || info.hasOwnProperty("rol"))){
-    }else{
-      setDoc(docuRefU,  {email: infoGoo.user.email, displayName: infoGoo.user.displayName, photoURL: infoGoo.user.photoURL, favorites: [], rol: "user"});
-    }
-};
-
-  const logout = async () => await signOut(auth)
-
-  const resetPassword = async (email) => sendPasswordResetEmail(auth, email);
-
+  const signup = async (email, password, rol, displayName, photoURL) => {
+    const result = await createUserWithEmailAndPassword(auth, email, password);
+    await axios.post(`${API_URL}/users`, { id: result.user.uid, displayName: displayName || '', photoURL: photoURL || '' });
+    return result;
+  };
+  const login = async (email, password) => {
+    const result = await signInWithEmailAndPassword(auth, email, password);
+    await syncProfile(result.user);
+    return result;
+  };
+  const loginWithGoogle = async () => {
+    const result = await signInWithPopup(auth, new GoogleAuthProvider());
+    await syncProfile(result.user);
+    return result;
+  };
   useEffect(() => {
-    const unsubuscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-      setLoading(false);
+    let active = true;
+    const unsubscribe = onAuthStateChanged(auth, async current => {
+      setLoading(true);
+      setUser(current);
+      if (!current) { setProfile(null); setLoading(false); return; }
+      try { await syncProfile(current); }
+      catch (error) { if (active) setProfile(null); }
+      finally { if (active) setLoading(false); }
     });
-    return () => unsubuscribe();
+    return () => { active = false; unsubscribe(); };
   }, []);
-
-  return (
-    <authContext.Provider value={{ signup, login, user, logout, loading, loginWithGoogle, resetPassword }}>
-      {children}
-    </authContext.Provider>
-  );
+  return <authContext.Provider value={{ signup, login, user, profile, loading, loginWithGoogle, logout: () => signOut(auth), resetPassword: email => sendPasswordResetEmail(auth, email) }}>{children}</authContext.Provider>;
 }
-
-//, confirmPassword, sendE, emailLink
