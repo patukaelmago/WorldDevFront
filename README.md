@@ -83,3 +83,6 @@ The original Henry team and credits above are preserved. Patricio Uskaer maintai
 The catalogue is seeded with explicitly fictional demonstration properties. Checkout creates demo reservations only; it never collects card details, charges money or sends emails. Availability and prices are checked on the server.
 
 Run `npm install` and `npm run build`. Set `REACT_APP_API_URL` at build time to override the default API. Firebase web configuration is public; authorization is enforced by verified ID tokens and server roles. Never commit private service-account credentials.
+# Read-only superadmin demo
+
+The login displays the public preview account `demo@worlddevelopers.example` and password `WorldDevDemo2026!`, with a direct demo button. These are intentionally public preview credentials, not a Firebase account or backend administrator token. The per-tab demo signs out any existing Firebase session and reloads to clear private Redux data. It exposes the existing dashboards with fictional users/bookings and a read-only banner. The API and server both block writes. Exit the demo to sign in with a personal account.

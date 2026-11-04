@@ -10,6 +10,7 @@ import loginico from "./login-icon.svg";
 import userico from "./username-icon.svg"
 import passwordico from "./password-icon.svg"
 import googleico from "./google-icon.svg"
+import { DEMO_EMAIL, DEMO_PASSWORD } from '../../../demoSession';
 
 export default function Login() {
 
@@ -22,7 +23,7 @@ export default function Login() {
 
   const [showPwd, setShowPwd] = useState(false)
 
-  const { login, loginWithGoogle, resetPassword } = useAuth();
+  const { login, loginDemo, loginWithGoogle, resetPassword } = useAuth();
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
@@ -35,7 +36,7 @@ export default function Login() {
     setError("");
     try {
       await login(user.email, user.password);
-      navigate('/home')
+      if (user.email.trim().toLowerCase() !== DEMO_EMAIL) navigate('/home');
     } catch (error) {
       // console.log(error.code)
       if (error.code === 'auth/wrong-password') {
@@ -83,6 +84,13 @@ export default function Login() {
       </div>
 
       <div className="text-center fs-1 fw-bold">Login</div>
+      <section className="border rounded p-3 mt-3 bg-light" aria-label="Acceso demo">
+        <h2 className="h5">Probá el superadmin</h2>
+        <p className="small mb-2">Acceso de solo lectura a los dashboards, con usuarios y reservas ficticios.</p>
+        <p className="small mb-1"><strong>Usuario:</strong> <span>{DEMO_EMAIL}</span></p>
+        <p className="small mb-2"><strong>Contraseña:</strong> <span>{DEMO_PASSWORD}</span></p>
+        <button className="btn btn-outline-info w-100" type="button" onClick={async () => { try { await loginDemo(); } catch { setError('No se pudo iniciar el demo. Intentá nuevamente.'); } }}>Entrar al demo de superadmin</button>
+      </section>
 
       <div className="input-group mt-4">
         <div className="input-group-text login">

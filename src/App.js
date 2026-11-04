@@ -44,6 +44,7 @@ import HistoryBookings from "./Components/Users/HistoryBookings";
 import Stock from "./Components/Admin/Stock/Stock";
 import Terms from "./Components/Terms/Terms";
 import Privacy from "./Components/Privacy/Privacy";
+import { DemoBanner } from './Components/Demo/ReadOnlyDemo';
 
 function App() {
   const dispatch = useDispatch()
@@ -55,6 +56,7 @@ function App() {
     <AuthProvider>
       <Nav />
       <div className="text-center small py-2 px-3" style={{background:"#e9f7f9",color:"#21454a"}}>Henry group project · Portfolio demo · Sample hotels and reservations, no real charges.</div>
+      <DemoBanner />
       <Routes>
         <Route exact path="/terms" element={< Terms />} />
         <Route exact path="/privacy" element={< Privacy />} />
