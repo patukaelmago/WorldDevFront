@@ -42,7 +42,7 @@ function Footer() {
             <ul className="list-unstyled">
               <li>World Developers.</li>
               <li>worlddevd@gmail.com</li>
-              <li>+54 5436286345.</li>
+              <li>+54 000 000-0000 (demo)</li>
             </ul>
           </div>
 
