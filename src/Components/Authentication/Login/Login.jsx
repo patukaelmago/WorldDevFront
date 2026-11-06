@@ -15,8 +15,8 @@ import { DEMO_EMAIL, DEMO_PASSWORD } from '../../../demoSession';
 export default function Login() {
 
   const [user, setUser] = useState({
-    email: "",
-    password: "",
+    email: DEMO_EMAIL,
+    password: DEMO_PASSWORD,
     rol:'',
     favorites:[]
   });
@@ -25,6 +25,7 @@ export default function Login() {
 
   const { login, loginDemo, loginWithGoogle, resetPassword } = useAuth();
   const [error, setError] = useState("");
+  const [submitting, setSubmitting] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = ({ target: { name, value } }) => {
@@ -34,6 +35,7 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
+    setSubmitting(true);
     try {
       await login(user.email, user.password);
       if (user.email.trim().toLowerCase() !== DEMO_EMAIL) navigate('/home');
@@ -45,6 +47,9 @@ export default function Login() {
       if (error.code === 'auth/user-not-found') {
         toast.error('User not found', { position: 'bottom-right' })
       }
+      setError(error.code === 'auth/wrong-password' ? 'La contraseña no es correcta. Usá los datos demo que aparecen arriba.' : 'No se pudo iniciar sesión. Intentá nuevamente.');
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -64,6 +69,7 @@ export default function Login() {
 
   const handleResetPassword = async (e) => {
     e.preventDefault();
+    if (user.email.trim().toLowerCase() === DEMO_EMAIL) return setError('El demo no necesita recuperar contraseña. Usá los datos que aparecen arriba.');
     if (!user.email) return toast.error('Write an email to reset password', { position: 'bottom-right' })
 
     try {
@@ -96,14 +102,14 @@ export default function Login() {
         <div className="input-group-text login">
           <img src={userico} alt="username-icon" className="user" style={{ height: "1rem" }} />
         </div>
-        <input className="form-control bg-light" type="email" name="email" id="email" placeholder="youremail@company.tld" onChange={handleChange} />
+        <input className="form-control bg-light" type="email" name="email" id="email" aria-label="Usuario o email" autoComplete="username" placeholder={DEMO_EMAIL} value={user.email} onChange={handleChange} />
       </div>
 
       <div className="input-group mt-1">
         <div className="input-group-text login">
           <img src={passwordico} alt="password-icon" style={{ height: "1rem" }} />
         </div>
-        <input className="form-control bg-light" type={showPwd ? "text" : "password"} name="password" id="password" placeholder="*************" onChange={handleChange} />
+        <input className="form-control bg-light" type={showPwd ? "text" : "password"} name="password" id="password" aria-label="Contraseña" autoComplete="current-password" placeholder="Contraseña" value={user.password} onChange={handleChange} />
         <div className="input-group-text loging" onClick={() => setShowPwd(!showPwd)}>
           {showPwd ? <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" height={"1.5rem"}>
             <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
@@ -129,8 +135,8 @@ export default function Login() {
 
       <div>
         {
-          !user.email || !user.password || user.password.length < 6 ?
-            <button className="btn btn-info login text-white w-100 mt-4 fw-semibold shadow-sm" type="submit" disabled>Login</button>
+          submitting || !user.email || !user.password || user.password.length < 6 ?
+            <button className="btn btn-info login text-white w-100 mt-4 fw-semibold shadow-sm" type="submit" disabled>{submitting ? 'Entrando…' : 'Login'}</button>
             :
             <button className="btn btn-info login text-white w-100 mt-4 fw-semibold shadow-sm" type="submit">Login</button>
         }

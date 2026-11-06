@@ -1,7 +1,8 @@
 import { POST_USERS, PUT_USERS, GET_DETAIL_USER, GET_ALL_USERS, GET_ALL_ADMINS, GET_BLOCKED, DELETE_USERS, CLEAN_FORM_ADMIN} from '../action/actionAuth.js'
+import { isDemoActive, demoProfile } from '../../demoSession';
 
 const initialStateAuth = {
-  users: {},
+  users: isDemoActive() ? { ...demoProfile } : {},
   allUsers: [],
   allAdmins: []
 }

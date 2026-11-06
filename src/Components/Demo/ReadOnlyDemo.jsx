@@ -21,7 +21,7 @@ export default function ReadOnlyDemo({ children }) {
     const container = root.current;
     const lock = () => {
       container.querySelectorAll('input, textarea').forEach(input => {
-        if (input.type === 'file' || input.type === 'checkbox' || input.type === 'radio') {
+        if (['file', 'checkbox', 'radio', 'range', 'color'].includes(input.type)) {
           if (!input.disabled) input.disabled = true;
         } else if (!input.readOnly) input.readOnly = true;
       });

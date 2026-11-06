@@ -3,7 +3,7 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, on
 import axios from 'axios';
 import { auth } from '../firebase';
 import { API_URL } from '../api';
-import { DEMO_EMAIL, DEMO_PASSWORD, demoUser, demoProfile, isDemoActive, setDemoActive } from '../demoSession';
+import { DEMO_EMAIL, DEMO_PASSWORD, demoUser, demoProfile, isDemoActive, setDemoActive, openDemoDashboard } from '../demoSession';
 const authContext = createContext();
 export const useAuth = () => {
   const context = useContext(authContext);
@@ -18,7 +18,7 @@ export default function AuthProvider({ children }) {
     await signOut(auth);
     setDemoActive(true);
     // A fresh page clears any previously loaded private Redux data.
-    window.location.assign('/profileSuperAdmin');
+    openDemoDashboard();
   };
   const syncProfile = async current => {
     const { data } = await axios.post(`${API_URL}/users`, { id: current.uid });
@@ -33,7 +33,7 @@ export default function AuthProvider({ children }) {
   };
   const login = async (email, password) => {
     if (email.trim().toLowerCase() === DEMO_EMAIL) {
-      if (password !== DEMO_PASSWORD) throw Object.assign(new Error('Wrong demo password'), { code: 'auth/wrong-password' });
+      if (password.trim() !== DEMO_PASSWORD) throw Object.assign(new Error('Wrong demo password'), { code: 'auth/wrong-password' });
       await loginDemo();
       return;
     }
