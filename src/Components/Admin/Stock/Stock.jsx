@@ -189,6 +189,7 @@ const Stock = () => {
             </button>
 
             <h2 className="mt-1 p-0">Bookings</h2>
+            <div className="table-responsive" role="region" aria-label="Stock table" tabIndex={0}>
             <table
               className="table table-striped"
               style={{ maxWidth: "1500px", marginInline: "auto" }}
@@ -303,6 +304,7 @@ const Stock = () => {
                 </tbody>
               )}
             </table>
+            </div>
             {datos.rol === "superAdmin" ? (
               <button
                 onClick={() => navigate("/profileSuperAdmin")}

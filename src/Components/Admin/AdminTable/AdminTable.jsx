@@ -54,7 +54,8 @@ export default function AdminTable() {
                 <dd><button className="btn btn-primary mt-1" type="button">Back</button></dd>
               </Link>
 
-                <table className="table table-striped" style={{ 'max-width': '1500px', 'margin-inline': 'auto' }}>
+                <div className="table-responsive" role="region" aria-label="AdminTable table" tabIndex={0}>
+            <table className="table table-striped" style={{ 'max-width': '1500px', 'margin-inline': 'auto' }}>
                   <thead>
                     <tr>
                       <th scope="col">Admin</th>
@@ -97,6 +98,7 @@ export default function AdminTable() {
                     ))}
                   </tbody>
                 </table>
+            </div>
             </div>
           </div> : <button className="btn btn-primary mt-1 mx-5 my-4" type="button" onClick={() => navigate(-1)}>Unauthorized entry, Back</button>
       }
