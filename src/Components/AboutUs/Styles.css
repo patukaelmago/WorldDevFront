@@ -1,0 +1,6 @@
+.wd-about { max-width: 1140px; }
+.wd-about-intro { background: #e9f7f9; color: #21454a; }
+.wd-about h1 { font-size: clamp(2rem, 5vw, 3.5rem); max-width: 850px; }
+.wd-team-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem 2rem; padding-left: 1.25rem; }
+.wd-about a, .wd-about p, .wd-team-grid li { overflow-wrap: anywhere; }
+@media (max-width: 575px) { .wd-team-grid { grid-template-columns: 1fr; } }

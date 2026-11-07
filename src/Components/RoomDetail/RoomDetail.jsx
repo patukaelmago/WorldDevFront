@@ -1,3 +1,4 @@
+import ImageGallery from '../ImageGallery/ImageGallery';
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
@@ -14,9 +15,10 @@ const RoomDetail = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { id } = useParams();
+  const [loading, setLoading] = useState(true);
   const roomDetail = useSelector((state) => state.reducerRoom.detailRoom);
   const { name, image, price, description, ServicesRooms } = roomDetail;
-  const { user } = useAuth();
+  const { user, isDemo } = useAuth();
   const { IDs } = useSelector(state => state.reducerFavorite)
   const [isFavorite, setIsFavorite] = useState(IDs.includes(id))
 
@@ -26,6 +28,7 @@ const RoomDetail = () => {
   const [error, setError] = useState(false)
 
   const handleFavorite = () => {
+    if (isDemo) return;
     if (!user) return toast.error('You must log in to add a room to favorites', { position: 'bottom-right' })
 
     setIsFavorite(!isFavorite)
@@ -39,11 +42,12 @@ const RoomDetail = () => {
   }, [id, IDs])
 
   useEffect(() => {
-    dispatch(getAllBooking())
-    dispatch(getDetailRoom(id));
-    dispatch(getFavoritesID(user?.uid))
-    return () => cleanRoomDetail()
-  }, [dispatch, id, user?.uid]);
+    let active = true;
+    setLoading(true);
+    if (user) { dispatch(getAllBooking()); dispatch(getFavoritesID(user.uid)); }
+    dispatch(getDetailRoom(id)).finally(() => { if (active) setLoading(false); });
+    return () => { active = false; dispatch(cleanRoomDetail()); };
+  }, [dispatch, id, user]);
 
   //manejo del date input  
   const [checkIn, setCheckIn] = useState(format(new Date(), 'yyyy-MM-dd'))
@@ -126,6 +130,7 @@ const RoomDetail = () => {
   //--------------------------GRACIAS JUAN CARLOS!!------------------------------------------------
 
   const handleAddToCart = () => {
+    if (isDemo) return;
     stockControl()
     dispatch(addRoomToCart({
       ...roomDetail,
@@ -137,34 +142,9 @@ const RoomDetail = () => {
 
   return (
     <>
-      {roomDetail.name ? (
+      {!loading && roomDetail.name ? (
         <div className="roomDetail-container text-start">
-          <div id="carousel" className="carousel slide" data-bs-ride="carousel">
-            <div className="carousel-indicators">
-              <button type="button" data-bs-target="#carousel" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
-              <button type="button" data-bs-target="#carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-              <button type="button" data-bs-target="#carousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-            </div>
-            <div className="carousel-inner">
-              <div className="carousel-item active" data-bs-interval="3000">
-                <img src={image[0]} className="roomDetail-img" alt={name} />
-              </div>
-              <div className="carousel-item" data-bs-interval="3000">
-                <img src={image[1]} className="roomDetail-img" alt={name}></img>
-              </div>
-              <div className="carousel-item" data-bs-interval="3000">
-                <img src={image[2]} className="roomDetail-img" alt={name}></img>
-              </div>
-            </div>
-            <button className="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
-              <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span className="visually-hidden">Previous</span>
-            </button>
-            <button className="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
-              <span className="carousel-control-next-icon" aria-hidden="true"></span>
-              <span className="visually-hidden">Next</span>
-            </button>
-          </div>
+          <ImageGallery key={id} images={image} name={name} className="roomDetail-img" />
           <div className="roomDetail-body">
             <h1 className="roomDetail-title mt-2">{name}</h1>
             <p>{description}</p>
@@ -210,11 +190,11 @@ const RoomDetail = () => {
                   toast.error('The check-out date should be greater than the check-in date', { position: 'bottom-right' }) &&
                   <button onClick={handleAddToCart} className='btn btn-primary mx-sm-2' disabled>ADD TO CART</button>
                   :
-                  <button onClick={handleAddToCart} className='btn btn-primary mx-sm-2'>ADD TO CART</button>
+                  <button onClick={handleAddToCart} className='btn btn-primary mx-sm-2' disabled={isDemo}>ADD TO CART</button>
               }
             </p>
 
-            <button className='btn btn-primary my-3' onClick={handleFavorite} type="button">
+            <button className='btn btn-primary my-3' onClick={handleFavorite} disabled={isDemo} aria-label="Toggle favourite room" type="button">
               <svg fill={isFavorite ? '#E53A27' : 'grey'} height={20} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z" /></svg>
             </button>
             <br />
@@ -224,7 +204,7 @@ const RoomDetail = () => {
           </div>
         </div>
       ) : (
-        <h3 className="roomDetail-loading text-start">Loading room detail...</h3>
+        <div className="container py-5" role="status">{loading ? <p>Loading room details. The demo server may take a moment to wake up…</p> : <><h1 className="h3">This room is not available</h1><p>The link may be outdated. Browse a hotel to see its current rooms.</p><button className="btn btn-primary" onClick={() => navigate('/home')}>Browse hotels</button></>}</div>
       )}
     </>
   );

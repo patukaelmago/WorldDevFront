@@ -17,15 +17,17 @@ function LandingPage() {
               World Developers
             </h1>
             <p>
-            Here you can find a wide variety of hotels around the country that offer rooms with different services and you can also search for IT events that are published by each hotel.
+            Discover the hotel, coworking and IT events platform we built as a team at Henry in 2022.
             </p>
             <p>
-            Each hotel provides a service oriented towards software developers. You will find all the amenities you need. You will be surrounded by the IT world
+            Restored in 2026 as a portfolio demo. Browse fictional properties and explore the superadmin dashboards with read-only access. No real bookings or payments.
             </p>
 
             <Link to="/home">
               <button className='landingpage-btn'>See hotels</button>
             </Link>
+            <Link className="btn btn-outline-secondary align-self-end" to="/login">Explore superadmin demo</Link>
+            <Link to="/about">Meet the original team and see what changed →</Link>
           </main>
         </div>
       </div>

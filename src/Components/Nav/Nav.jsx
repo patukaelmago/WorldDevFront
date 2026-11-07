@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux/es/exports";
 import logo from "./world-developers.png";
 import suitcase from "./suitcase.svg";
@@ -30,6 +30,10 @@ const navLinks = [
 ];
 
 export default function Nav() {
+  const { pathname } = useLocation();
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [isUserMenuOpen, setUserMenuOpen] = useState(false);
+  useEffect(() => { setMobileOpen(false); setUserMenuOpen(false); }, [pathname]);
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const { logout, user } = useAuth();
@@ -55,7 +59,6 @@ export default function Nav() {
     }
   };
 
-  const [isUserMenuOpen, setUserMenuOpen] = useState(false)
   const handleUserMenuToggle = () => setUserMenuOpen(!isUserMenuOpen)
   
   return (
@@ -67,16 +70,15 @@ export default function Nav() {
         <button
           className="navbar-toggler border-0 shadow-none"
           type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
           aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toogle navigation"
+          aria-expanded={mobileOpen}
+          aria-label="Toggle navigation"
+          onClick={() => setMobileOpen(open => !open)}
         >
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        <div className="collapse navbar-collapse pb-2 pb-lg-0" id="navbarSupportedContent">
+        <div className={`collapse navbar-collapse pb-2 pb-lg-0${mobileOpen ? ' show' : ''}`} id="navbarSupportedContent">
           <div className="mx-auto"></div>
           <ul className="navbar-nav d-flex align-items-center">
             {navLinks.map(link => (
@@ -96,9 +98,9 @@ export default function Nav() {
                 Log in
               </button>
             ) : (
-              <div className="d-flex flex-column align-items-center ms-lg-4 pe-lg-1" role="button" onClick={handleUserMenuToggle}>
+              <button className="d-flex flex-column align-items-center ms-lg-4 pe-lg-1 border-0 bg-transparent" type="button" aria-label="Open profile menu" aria-expanded={isUserMenuOpen} onClick={handleUserMenuToggle}>
                 <img className="rounded-circle" width={40} src={user?.photoURL || defaultPic} alt="Profile pic" />
-              </div>
+              </button>
             )}
 
             {isUserMenuOpen && (

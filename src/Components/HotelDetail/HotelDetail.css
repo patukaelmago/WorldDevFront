@@ -25,3 +25,4 @@ input[type=date] {
 .hotelDetail-loading {
   margin: 3.75rem 3rem;
 }
+@media (max-width: 575px) { .hotelDetail-body { padding: 1.5rem 1rem; } .hotelDetail-img { height: 42vh; } }

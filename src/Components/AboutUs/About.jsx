@@ -1,96 +1,29 @@
 import React from "react";
-import "./Styles.css"
+import { Link } from "react-router-dom";
+import "./Styles.css";
 
-const AboutUs = () => {
-
-  return (
-    <div className="container">
-      <div className="container marketing">
-        <div className="position-relative  text-center bg-light">
-          <div className="col-md-5 p-lg-5 mx-auto my-5">
-            <h1 className="display-4 fw-normal">About Us</h1>
-            <p className="lead fw-normal">We are a group of developers that seeks to provide relaxation times full of conferences with great programmers in the industry, where you can actively participate in addition to generating new links and future projects.</p>
-          </div>
-        </div>
-
-        <div className="row">
-          <div className="col-lg-4 border rounded">
-            <img
-              src='https://th.bing.com/th/id/R.db2477c198d3e797687e377cf24a5b73?rik=nqbukdmRfWI3iw&pid=ImgRaw&r=0'
-              alt="Hotels" width='100%' object-fit='cover' height="200" className="imagen" />
-            <h2>Hotels</h2>
-            <p>World developers offers you a wide variety of hotels in the best destinations so that you can enjoy an unforgettable vacation while you work.</p>
-            <p><a className="btn btn-outline-info" href="/home">View details &raquo;</a></p>
-          </div>
-
-          <div className="col-lg-4 border rounded">
-            <img
-              src="https://t-cf.bstatic.com/xdata/images/hotel/max1024x768/384792512.jpg?k=eb804905e3f289540b7d8c74be4dab19d54edce4fc70ac4d2b8b8f41a8498715&o=&hp=1"
-              alt="Rooms" width='100%' object-fit='cover' height="200" className="imagen" />
-            <h2>Rooms</h2>
-            <p>If you want to live a stay with the best services and comforts, the rooms of our different hotels are the ideal option.
-            </p>
-            <p><a className="btn btn-outline-info" href="/hotel/room/57a97b5b-60ca-4bdd-ada1-36fb9d762746">View details &raquo;</a></p>
-          </div>
-
-          <div className="col-lg-4 border rounded">
-            <img
-              src="https://res.cloudinary.com/dyyoavgq5/image/upload/v1667235490/hotels/q0rwxbri9nr61a7axied.jpg"
-              alt="Events" width='100%' object-fit='cover' height="200" className="imagen" />
-            <h2>Events</h2>
-            <p>In an industry that moves as fast as development, it's a challenge to stay on top of what's new. Come and participate in conferences and unique events.
-            </p>
-            <p><a className="btn btn-outline-info" href="/home/Events">View details &raquo;</a></p>
-          </div>
-        </div>
-
-        <hr className="featurette-divider" />
-
-        <div className="row featurette">
-          <div className="col-md-7">
-            <h2 className="featurette-heading">Relax time. <span className="text-muted"> Focused on the concept of Med & Relax. </span>
-            </h2>
-            <p className="lead">At Tiempo de Relax we offer a carefully thought out program of activities. In our IT world of remote work, they usually cause contractures from bad postures in addition to the stress of permanently carrying out new knowledge. That is why we devised programs aimed at providing you with a complete relaxation experience, including body, mind and spirit.</p>
-          </div>
-          <div className="col-md-5">
-            <img src='https://static.wixstatic.com/media/11062b_b277c9f0c9184f83abc87a3ab3df2454~mv2.jpg/v1/crop/x_2572,y_0,w_3450,h_4015/fill/w_405,h_471,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/Relajaci%C3%B3n.jpg'
-              alt="Relax time"></img>
-          </div>
-        </div>
-
-        <hr className="featurette-divider" />
-
-        <div className="row featurette">
-          <div className="col-md-7 order-md-2">
-            <h2 className="featurette-heading">Technology conferences. <span className="text-muted">Participate, inform yourself and develop.</span>
-            </h2>
-            <p className="lead">Attending conferences is an excellent way to find out about the latest technological advances, new versions, updates, changes, new practices, tips and advice. And although attending an event in person has additional benefits such as the opportunity to ask questions of industry leaders, or meet more people with similar interests to yours, not all of us have the opportunity to attend these conferences.</p>
-          </div>
-          <div className="col-md-5 order-md-1">
-            <img src='https://th.bing.com/th/id/R.c939236b78ddcec100fa8c139d262d6d?rik=7bz%2fsP15nRA8ZA&pid=ImgRaw&r=0&sres=1&sresct=1' width="500"
-              alt="Technology conferences"></img>
-          </div>
-        </div>
-
-        <hr className="featurette-divider" />
-
-        <div className="row featurette">
-          <div className="col-md-7">
-            <h2 className="featurette-heading">Our heated pools.<span className="text-muted">Cheer up when you relax.</span></h2>
-            <p className="lead">Holidays in our hotels are really relaxing, even during the first days of spring, when the weather is still very uncertain. Some have an aquatic area with covered and heated pools where you can share unforgettable moments with the whole family and relax after a day full of meetings with powers of the IT world.</p>
-          </div>
-          <div className="col-md-5">
-            <img src='https://static.wixstatic.com/media/85c85c_7c6bd050d3ba4d0198c40986d7dde323~mv2.jpg/v1/fill/w_783,h_522,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/85c85c_7c6bd050d3ba4d0198c40986d7dde323~mv2.jpg' width="500"
-              alt="Our heated pools."></img>
-          </div>
-        </div>
-
-        <hr className="featurette-divider" />
-
-      </div>
-    </div>
-  );
-};
-
-export default AboutUs;
-
+const team = ['Maira Fernanda Bravo Madrid', 'Maria de los Angeles Gallardo', 'Alexis Franco Llopard', 'Alfredo Patricio Uskaer', 'Paula Daiana Yedro Infante', 'Oliver Sebastian Borda Mahecha', 'Ana Sol Maldonado', 'Hernan Javier Rinaldi'];
+export default function AboutUs() {
+  return <main className="container wd-about py-5">
+    <header className="wd-about-intro p-4 p-md-5 rounded-4">
+      <p className="text-uppercase fw-bold small">Henry · Team project · 2022</p>
+      <h1>Built together. Ready to explore again.</h1>
+      <p className="lead">World Developers brings hotel stays, coworking and IT events into one web application. Eight classmates built the original Full Stack project during the Henry bootcamp in 2022.</p>
+      <p>This is a portfolio demonstration with fictional hotels, events and reservations. It does not offer real accommodation or accept payments.</p>
+      <div className="d-flex flex-wrap gap-3"><Link className="btn btn-primary" to="/login">Explore the superadmin demo</Link><Link className="btn btn-outline-secondary" to="/home">Browse sample hotels</Link></div>
+    </header>
+    <section className="my-5" aria-labelledby="team-heading">
+      <h2 id="team-heading">The original team</h2>
+      <p>The original project was a shared effort. Its authorship belongs to the eight members below; this maintained version preserves that credit.</p>
+      <ul className="wd-team-grid">{team.map(name => <li key={name}>{name}</li>)}</ul>
+    </section>
+    <section className="row g-4 mb-5">
+      <div className="col-md-6"><div className="border rounded p-4 h-100"><h2 className="h4">The 2022 project</h2><p>The team developed the hotel catalogue, rooms, IT events, user accounts, favourites, reservation flow and administration dashboards. The original scope included Stripe payments and Cloudinary image uploads.</p><p className="mb-0">JavaScript · React · Redux · Node.js · Express · PostgreSQL · Sequelize · Firebase · Bootstrap</p></div></div>
+      <div className="col-md-6"><div className="border rounded p-4 h-100"><h2 className="h4">The maintained version · 2026</h2><p>Patricio Uskaer restored the frontend and API, moved the catalogue to a separate database, reconnected authentication and added a public superadmin preview with read-only access.</p><p className="mb-0">The current checkout is a simulation. The public demo shows fictional users and reservations, and cannot save changes or perform payments.</p></div></div>
+    </section>
+    <section className="my-5" aria-labelledby="explore-heading"><h2 id="explore-heading">Explore World Developers</h2><div className="row g-3">
+      {[['Hotels & rooms', 'Browse sample properties and open their current rooms.', '/home'], ['IT events', 'Explore technology events associated with the sample hotels.', '/home/Events'], ['Admin dashboards', 'Use the prefilled demo login to inspect the dashboards in read-only mode.', '/login']].map(([title, text, path]) => <div className="col-md-4" key={path}><div className="border rounded p-4 h-100"><h3 className="h5">{title}</h3><p>{text}</p><Link to={path}>Explore {title.toLowerCase()} →</Link></div></div>)}
+    </div></section>
+    <section className="border-top pt-4"><h2 className="h4">Source code</h2><p>Explore the maintained repositories, including the original project history and team credits.</p><div className="d-flex flex-wrap gap-3"><a href="https://github.com/patukaelmago/WorldDevFront" target="_blank" rel="noreferrer">Frontend on GitHub</a><a href="https://github.com/patukaelmago/WorldDevBack" target="_blank" rel="noreferrer">Backend on GitHub</a></div></section>
+  </main>;
+}

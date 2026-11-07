@@ -1,42 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
 export default function Terms() {
-
-    return (
-        <div>
-            <div >
-                <p className='parrafo'>03 Nov 2022</p>
-                <br />
-                <h5 className='title'>Terms of use of the Affiliate partner account WorldDevelopers.com</h5>
-                <br />
-                <p className='parrafo'>WorldDevelopers.com may offer its business partners access to online user accounts, such as Connect (extranet) and the Affiliate Center (hereinafter "WorldDevelopers.com Services"). Persons who have access to these user accounts, whether through a direct agreement with WorldDevelopers.com or because they act on behalf of a WorldDevelopers.com partner (hereinafter the "Master Agreement"), must comply with the following Terms of use.</p>
-                <p className='parrafo'>You agree not to use, or permit third parties to use, the WorldDevelopers.com Services for any purpose other than that agreed to in the Master Agreement, and not to:</p>
-                <li className='parrafo'>Send unsolicited commercial emails to customers.</li>
-                <li className='parrafo'>Falsifying information, including concealing your identity.</li>
-                <li className='parrafo'>Upload viruses, malware or any type of malicious code.</li>
-                <li className='parrafo'>Change, disable or circumvent any process of the WorldDevelopers.com systems.</li>
-                <li className='parrafo'>Damage, disable, impair and/or overload WorldDevelopers.com systems.</li>
-                <li className='parrafo'>Reverse engineer any of the services offered by WorldDevelopers.com</li>
-                <li className='parrafo'>Copy or use WorldDevelopers.com trademarks, unless expressly agreed to with WorldDevelopers.com</li>
-                <li className='parrafo'>Reveal, share or resell any of your user data.</li>
-                <li className='parrafo'>Allow third parties access to WorldDevelopers.com systems for commercial or any other reason, without the express written consent of WorldDevelopers.com</li>
-                <li className='parrafo'>Use the WorldDevelopers.com Services in violation of applicable laws, including those relating to the legal rights of others. This also includes uploading content that violates the intellectual property rights of third parties</li>
-                <br />
-                <p className='parrafo'>Loss or misuse of user data should be reported immediately to report@WorldDevelopers.com.</p>
-                <p className='parrafo'>Failure to comply with these Terms of Use may result in the suspension of your access to the WorldDevelopers.com Services. WorldDevelopers.com reserves the right to take additional legal action, such as termination of the contract, in accordance with the respective Master Agreement.</p>
-                <br />
-                <p className='parrafo'>World Developers</p>
-            </div>
-            <div>
-                <Link to='/login'>
-                    <div className="d-grid gap-2 d-sm-block">
-                        <button className="btn btn-primary mt-4" type="button">Go Login</button>
-                    </div>
-
-                </Link>
-            </div>
-        </div>
-    )
+  return <main className="container py-5" style={{maxWidth: 850}}><h1>Using the World Developers demo</h1><p className="text-muted">Updated November 7, 2026</p>
+    <h2 className="h4 mt-4">A team project, shared as a portfolio</h2><p>World Developers was built collaboratively at Henry in 2022. Patricio Uskaer maintains this demonstration; the original team is credited on the About page.</p>
+    <h2 className="h4 mt-4">What you can explore</h2><p>You can browse fictional hotels, rooms and IT events. The public superadmin demo lets you inspect administration dashboards with sample users and reservations. It is read-only: saving, deleting, uploading files and cancelling reservations are disabled.</p>
+    <h2 className="h4 mt-4">No real bookings or payments</h2><p>Listed properties, availability and prices are sample data. Any reservation created through a personal account is a simulation, not a booking with a hotel. This version does not collect payment card details, charge money or send booking or marketing emails.</p>
+    <h2 className="h4 mt-4">Responsible use</h2><p>Use the demo to explore the application and provide feedback. Do not attempt to access other people's accounts or disrupt the service. Sample data and features may change as the portfolio is updated.</p>
+    <h2 className="h4 mt-4">Feedback</h2><p>You can report a problem through the <a href="https://github.com/patukaelmago/WorldDevFront/issues" target="_blank" rel="noreferrer">frontend repository</a>. Public issues should contain only information you want to share publicly.</p>
+    <div className="d-flex gap-3 mt-4"><Link to="/login">Explore the demo</Link><Link to="/about">Project and team</Link><Link to="/privacy">Privacy information</Link></div>
+  </main>;
 }
-

@@ -146,7 +146,7 @@ export function getDetailHotel(id) {
       const detailH = await axios.get(`${BACK_URL}/hotels/${id}`)
       return dispatch({
         type: GET_HOTEL_DETAIL,
-        payload: detailH.data
+        payload: detailH.data && typeof detailH.data === 'object' ? detailH.data : {}
       })
     } catch (error) {
       console.log(error)
@@ -191,7 +191,7 @@ export function getDetailRoom(id) {
       const detailR = await axios.get(`${BACK_URL}/rooms/${id}`)
       return dispatch({
         type: GET_ROOMS_DETAIL,
-        payload: detailR.data
+        payload: detailR.data && typeof detailR.data === 'object' ? detailR.data : {}
       })
     } catch (error) {
       console.log(error)

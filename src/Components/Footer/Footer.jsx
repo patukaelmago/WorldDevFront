@@ -1,92 +1,15 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { Link } from 'react-router-dom';
 import './Footer.css';
-
-import sendEmail from '../emails/sendOfferts';
-function Footer() {
-
-  function submitHandler(e) {
-    e.preventDefault();
-    let correo = e.target.correo.value;
-    sendEmail(correo);
-    document.getElementById("correo").value = "";
-  }
-
-  return (
-    <footer className="footer text-white">
-      <div className="footer-container container">
-        <div className="row">
-          <div className="col-lg-4 mb-3">
-            <h6 className="fw-bold text-uppercase text-heading mb-3">about World Developers</h6>
-            <p>
-              We are a platform where you can publish your hotel, manage and achieve great results because we have an important diffusion in the market. You can also publish events that take place in your rooms and get the client to have many additional services and increase their stay at the hotel.
-            </p>
-            <ul className="list-inline">
-              <li className="list-inline-item">
-                <Link to='' className='text-reset'><i className="bi bi-youtube"></i></Link>
-              </li>
-              <li className="list-inline-item">
-                <Link to='' className='text-reset'><i className="bi bi-twitter"></i></Link>
-              </li>
-              <li className="list-inline-item">
-                <Link to='' className='text-reset'><i className="bi bi-facebook"></i></Link>
-              </li>
-              <li className="list-inline-item">
-                <Link to='' className='text-reset'><i className="bi bi-instagram"></i></Link>
-              </li>
-            </ul>
-          </div>
-
-          <div className="col-lg-2 col-md-6 mb-3">
-            <h6 className="fw-bold text-uppercase text-heading mb-3">Contact</h6>
-            <ul className="list-unstyled">
-              <li>World Developers.</li>
-              <li>worlddevd@gmail.com</li>
-              <li>+54 000 000-0000 (demo)</li>
-            </ul>
-          </div>
-
-          <div className="col-lg-2 col-md-6 mb-3">
-            <h6 className="fw-bold text-uppercase text-heading mb-3">Pages</h6>
-            <ul className="list-unstyled">
-              <li><Link to='/' className='footer-link text-decoration-none text-white'><i className="bi bi-house-door"></i> Home</Link></li>
-              <li><Link to='/home' className='footer-link text-decoration-none text-white'><i className="bi bi-building"></i> Hotels</Link></li>
-              <li><Link to='/home/Events' className='footer-link text-decoration-none text-white'><i className="bi bi-calendar-check"></i> Events</Link></li>
-              <li><Link to='/about' className='footer-link text-decoration-none text-white'><i className="bi bi-info-circle"></i> About Us</Link> </li>
-            </ul>
-          </div>
-
-          <div className="col-lg-4">
-            <h6 className="fw-bold text-uppercase text-heading mb-3">Daily offers & discounts</h6>
-            <p className="mb-3">Receive our offers in your email</p>
-            <form className="input-group mb-3" onSubmit={submitHandler}>
-              <input style={{ maxWidth: '400px' }} className="form-control bg-white border-white border-end-0" type="email" name='correo' id='correo' placeholder="Your Email" aria-label="Your Email" />
-              <button className="footer-btn btn border-white bg-white border-start-0" type="submit">
-                <i className="bi bi-cursor-fill"></i>
-              </button>
-            </form>
-          </div>
-        </div>
-
-        <div className="py-4 mt-2">
-          <div className="row align-items-center">
-            <div className="col-md-6 text-center text-md-start">
-              <p className="text-sm mb-md-0">&copy; {new Date().getFullYear()} - World Developers, Work & Relax. All rights reserved.</p>
-            </div>
-            <div className="col-md-6 text-center text-md-end">
-              <Link className='footer-link text-white text-decoration-none' to="/terms">
-                Terms and Conditions
-              </Link>
-              &nbsp;|&nbsp;
-              <Link className='footer-link text-white text-decoration-none' to="/privacy">
-                Privacy Policy
-              </Link>
-            </div>
-          </div>
-        </div>
+export default function Footer() {
+  return <footer className="footer text-white">
+    <div className="footer-container container">
+      <div className="row g-4">
+        <div className="col-lg-5"><h2 className="h6 fw-bold text-uppercase mb-3">World Developers · Work & Relax</h2><p>A hotel and IT events application built by a team of eight at Henry in 2022. Restored and maintained by Patricio Uskaer as a portfolio demonstration.</p><Link to="/about" className="text-white">Meet the original team</Link></div>
+        <div className="col-lg-3 col-sm-6"><h2 className="h6 fw-bold text-uppercase mb-3">Explore</h2><ul className="list-unstyled">{[['/', 'Home'], ['/home', 'Hotels & rooms'], ['/home/Events', 'IT events'], ['/login', 'Superadmin demo']].map(([path, label]) => <li className="mb-2" key={path}><Link to={path} className="footer-link text-white">{label}</Link></li>)}</ul></div>
+        <div className="col-lg-4 col-sm-6"><h2 className="h6 fw-bold text-uppercase mb-3">Portfolio demo</h2><p>Fictional properties and reservations. No real accommodation, charges or promotional emails.</p><p className="small">Sample contact: demo@worlddevelopers.example<br />+54 000 000-0000 (demo)</p><div className="d-flex flex-wrap gap-3"><a href="https://github.com/patukaelmago/WorldDevFront" className="text-white" target="_blank" rel="noreferrer">Frontend source</a><a href="https://github.com/patukaelmago/WorldDevBack" className="text-white" target="_blank" rel="noreferrer">Backend source</a></div></div>
       </div>
-    </footer>
-  )
+      <div className="py-4 mt-3 border-top d-flex flex-wrap justify-content-between gap-2"><p className="small mb-0">© {new Date().getFullYear()} World Developers · Original Henry team project</p><div className="d-flex gap-3"><Link className="text-white" to="/terms">Demo terms</Link><Link className="text-white" to="/privacy">Privacy</Link></div></div>
+    </div>
+  </footer>;
 }
-
-export default Footer;

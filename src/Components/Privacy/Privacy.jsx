@@ -1,53 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './Styles.css'
-
 export default function Privacy() {
-
-    return (
-        <div>
-
-            <div>
-
-                <p className='parrafo'>03 Nov 2022</p>
-                <br />
-                <h5 className='title'>Privacy Policy</h5>
-                <br />
-                <h6 className='title'>Our commitment to comply with the Law</h6>
-                <p className='parrafo'>This Privacy Policy affects the data you provide us, either through the forms, or through any other means at your disposal (telephone, email, etc.). By accepting this Privacy Policy, you give your consent for the company (hereinafter, the Tourist Intermediary) to process your personal data for the purposes indicated below.</p>
-                <br />
-                <h6 className='title'>What information will we collect and what do we use it for?</h6>
-                <p className='parrafo'>We will ask for your name and your email in case you want to ask us or comment on something. We will only use it to process your queries.
-                    We will also collect the necessary information to manage your reservations and to keep you informed of their status. We will ask for your name and surname, address, email, telephone number, credit card information and some other information that may be necessary for said purpose.
-                    We will access and we will be able to treat the data that you have provided us in the forms and in the use that you make of the Website for the purposes set forth in this Privacy Policy.
-                    In addition, by the use you make of the Page you will be able to provide various personal information, which we will use in a dissociated manner to compile statistics. With this, we intend to improve our services and offer you a personalized navigation.
-                    Provided that you have previously allowed it, we will send you offers related to our services, via email. Said offers may include advertising from third parties related to the services you contracted.</p>
-                <br />
-                <h6 className='title'>Data security</h6>
-                <p className='parrafo'>The entire reservation section on our website will be protected by an SSL security protocol, so that your data is safe. We try to prevent third parties from accessing them by making every reasonable effort to do so.</p>
-                <br />
-                <h6 className='title'>Your rights</h6>
-                <p className='parrafo'>You can exercise your rights of access, rectification, cancellation and opposition according to the law by sending us a written request through the contact email of the page.</p>
-                <br />
-                <h6 className='title'>Idiom</h6>
-                <p className='parrafo'>The language applicable to this Privacy Policy is English. If you have been offered versions of this Privacy Policy in other languages, it has been for your convenience and you expressly accept that they will always be governed by the English version.
-                    If there is any contradiction between what the English version of this Privacy Policy says and what the translation says, in any case the English version will prevail.</p>
-                <br />
-                <h6 className='title'>Doubts and queries</h6>
-                <p className='parrafo'>Of course, if you have doubts or questions about the protection of your data on this hotel website, you can contact us through the contact email and we will try to solve your doubts as soon as possible.</p>
-                <br />
-                <p className='parrafo'>World Developers</p>
-            </div>
-
-            <div>
-                <Link to='/login'>
-                    <div className="d-grid gap-2 d-sm-block">
-                        <button className="btn btn-primary mt-4" type="button">Go Login</button>
-                    </div>
-
-                </Link>
-            </div>
-
-        </div>
-    )
+  return <main className="container py-5" style={{maxWidth: 850}}><h1>Privacy in this portfolio demo</h1><p className="text-muted">Updated November 7, 2026</p>
+    <h2 className="h4 mt-4">Public demo access</h2><p>The published demo login opens a read-only preview. Its users, email addresses and reservations are fabricated. It does not provide access to personal account records. The demo selection is stored in your browser's session storage and can be cleared with “Salir del demo”.</p>
+    <h2 className="h4 mt-4">Personal accounts</h2><p>If you register or sign in with a personal account, Firebase Authentication manages sign-in. The application uses your account identifier and email address, and may receive your display name and profile photo when signing in with Google.</p><p>The backend stores profile fields you submit, your favourites and any simulated reservations you create. Authentication tokens are sent to the API to check your identity and permissions. Passwords are handled by Firebase Authentication, rather than stored in the application's profile database.</p>
+    <h2 className="h4 mt-4">Browser storage and services</h2><p>Firebase uses browser storage to maintain authentication. The application stores the shopping cart locally and the public demo selection for the current tab. The frontend runs on Vercel, the API on Render and the application database on Neon. Firebase is used for authentication. Hotel illustrations may load from external image providers.</p>
+    <h2 className="h4 mt-4">Payments and emails</h2><p>This deployment does not ask for payment card details, process real payments or send promotional emails. There is no newsletter subscription form.</p>
+    <h2 className="h4 mt-4">Questions and account information</h2><p>To ask about a personal account or its removal, contact the maintainer through <a href="https://www.linkedin.com/in/patricio-uskaer/" target="_blank" rel="noreferrer">Patricio Uskaer's LinkedIn profile</a>. Use the repository issues for public technical feedback.</p>
+    <Link className="d-inline-block mt-4" to="/login">Back to login</Link>
+  </main>;
 }

@@ -86,3 +86,7 @@ Run `npm install` and `npm run build`. Set `REACT_APP_API_URL` at build time to 
 # Read-only superadmin demo
 
 The login displays the public preview account `demo@worlddevelopers.example` and password `WorldDevDemo2026!`, with a direct demo button. These are intentionally public preview credentials, not a Firebase account or backend administrator token. The per-tab demo signs out any existing Firebase session and reloads to clear private Redux data. It exposes the existing dashboards with fictional users/bookings and a read-only banner. The API and server both block writes. Exit the demo to sign in with a personal account.
+
+## Portfolio presentation refresh
+
+The About page credits all eight original Henry team members and distinguishes the 2022 collaboration from the 2026 maintenance. The home page and footer link to the live catalogue and read-only demo; legacy promotional forms and placeholder social links have been removed. Demo terms and privacy information describe the currently deployed features. Social metadata uses the local 1200 × 630 PNG at `public/world-developers-social.png`. See `SECURITY.md` for the historical credential review and its unverified revocation status.

@@ -53,3 +53,6 @@
     opacity: 0;
   }
 }
+
+.navbar-brand img { max-width: min(290px, 68vw); height: auto; max-height: 44px; }
+@media (max-width: 991px) { .nav-usermenu-bg { position: static; margin-top: 1rem; } }
